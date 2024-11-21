@@ -7,6 +7,9 @@ junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
 material = "1.10.0"
+fcrcore = "3.2.0"
+permissionx = "1.6.4"
+lifecycle_viewmodel_ktx = "2.6.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -15,7 +18,9 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-fcrcore = { group = "io.github.agora-apaas", name = "FcrCore", version = "3.2.0" }
+lifecycle_viewmodel_ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle_viewmodel_ktx" }
+permissionx = { group = "com.guolindev.permissionx", name = "permissionx", version.ref = "permissionx" }
+fcrcore = { group = "io.github.agora-apaas", name = "FcrCore", version.ref = "fcrcore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

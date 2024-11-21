@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="?attr/colorSurface"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTop"
@@ -14,11 +14,11 @@
         app:layout_constraintGuide_percent="0.4" />
 
     <Button
-        android:id="@+id/btnCreateRoom"
+        android:id="@+id/btnJoinRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="创建会议"
+        android:text="@string/fcr_login_free_option_join"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineTop" />
@@ -37,10 +37,10 @@
             android:id="@+id/tvRoomNameOrId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="会议名称:" />
+            android:text="@string/meeting_id" />
 
         <EditText
-            android:id="@+id/etRoomName"
+            android:id="@+id/etRoomNameOrId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="会议名称"
@@ -49,20 +49,51 @@
 
         <TextView
             android:id="@+id/tvNickName"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:visibility="gone"
-            android:text="昵称:" />
+            android:text="@string/nick_name" />
 
         <EditText
             android:id="@+id/etNickName"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="昵称"
-            android:visibility="gone"
             android:inputType="text"
             tools:ignore="LabelFor" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvRole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/select_role"
+        app:layout_constraintLeft_toLeftOf="@id/inputWarpLayout"
+        app:layout_constraintTop_toBottomOf="@id/btnJoinRoom" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/tvRole"
+        app:layout_constraintTop_toBottomOf="@id/tvRole">
+
+        <RadioButton
+            android:id="@+id/btnParticipant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/role_participant" />
+
+        <RadioButton
+            android:id="@+id/btnHost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/role_host" />
+    </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
