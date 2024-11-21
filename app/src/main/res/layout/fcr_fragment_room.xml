@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/left_line"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/right_line"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_room_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/top_line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextureView
+        android:id="@+id/self_video_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_room_id"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <TextureView
+        android:id="@+id/remote_video_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/self_video_view"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <Button
+        android:id="@+id/btn_leave_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="离开房间"
+        app:layout_constraintLeft_toRightOf="@id/left_line"
+        app:layout_constraintTop_toBottomOf="@id/bottom_line"
+        />
+
+    <Button
+        android:id="@+id/btn_open_local_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="关闭摄像头"
+        app:layout_constraintLeft_toRightOf="@id/left_line"
+        app:layout_constraintTop_toBottomOf="@id/btn_leave_room" />
+
+    <Button
+        android:id="@+id/btn_open_local_audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="关闭麦克风"
+        app:layout_constraintLeft_toRightOf="@id/right_line"
+        app:layout_constraintTop_toBottomOf="@id/btn_share_screen" />
+
+    <Button
+        android:id="@+id/btn_share_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="屏幕共享"
+        app:layout_constraintLeft_toRightOf="@id/right_line"
+        app:layout_constraintTop_toBottomOf="@id/bottom_line" />
+
+    <TextureView
+        android:id="@+id/fl_screen_view"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/colorSurface"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <Button
+        android:id="@+id/btnCreateRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="创建会议"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTop" />
+
+    <LinearLayout
+        android:id="@+id/inputWarpLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.5">
+
+        <TextView
+            android:id="@+id/tvRoomNameOrId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="会议名称:" />
+
+        <EditText
+            android:id="@+id/etRoomName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="会议名称"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
+
+        <TextView
+            android:id="@+id/tvNickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            android:text="昵称:" />
+
+        <EditText
+            android:id="@+id/etNickName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="昵称"
+            android:visibility="gone"
+            android:inputType="text"
+            tools:ignore="LabelFor" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

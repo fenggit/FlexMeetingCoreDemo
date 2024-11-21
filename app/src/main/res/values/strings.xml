@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">FlexMeetingCoreDemo</string>
+    <string name="no_enough_permissions">没有足够的权限</string>
+    <string name="room_id_empty_tips">房间号不能为空</string>
+    <string name="meeting_name_empty_tips">会议名称不能为空</string>
+    <string name="nickname_empty_tips">昵称不能为空</string>
+    <string name="meeting_number_empty_tips">会议号不能为空</string>
+    <string name="nickname_tips_content_length">昵称请输入2–20位长度的内容</string>
+    <string name="fcr_login_free_option_create">创建会议</string>
+    <string name="fcr_login_free_option_join">加入会议</string>
+    <string name="meeting_name">会议名称:</string>
+    <string name="meeting_id">会议号:</string>
+    <string name="nick_name">昵称:</string>
+    <string name="select_role">选择身份</string>
+    <string name="role_host">主持人</string>
+    <string name="role_participant">参会者</string>
+    <string name="room_not_exist">房间不存在</string>
 </resources>
