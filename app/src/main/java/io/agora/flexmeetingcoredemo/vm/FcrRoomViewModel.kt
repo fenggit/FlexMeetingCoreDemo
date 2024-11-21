@@ -48,6 +48,7 @@ class FcrRoomViewModel : ViewModel() {
     private val _joinRoomStatus = MutableLiveData<Result<Unit>>()
     val joinRoomStatus: LiveData<Result<Unit>> = _joinRoomStatus
     val leaveRoom = MutableLiveData<Boolean>()
+    val waiting = MutableLiveData<Boolean>(false)
     var roomId: String = ""
     private fun createCoreEngine(context: Context, sceneConfig: FcrUISceneConfig): FcrCoreEngine {
         val config = FcrCoreEngineConfig(
@@ -65,6 +66,7 @@ class FcrRoomViewModel : ViewModel() {
      * 免登录：创建房间并进入房间
      */
     fun createJoinRoom(context: Context, userName: String, roomName: String, userRole: FcrUserRole) {
+        waiting.postValue(true)
         val startTime = System.currentTimeMillis()
         val endTime = startTime + 60 * 1000 * 60 * 24                // 24 hour
         val userId = genUserId(userName)
@@ -73,11 +75,13 @@ class FcrRoomViewModel : ViewModel() {
         val call = AppRetrofitManager.getService(FcrSceneRoomService::class.java).createRoom(req)
         AppRetrofitManager.Companion.exc(call, object : HttpCallback<HttpBaseRes<FcrSceneCreateRoomRes>>() {
             override fun onSuccess(result: HttpBaseRes<FcrSceneCreateRoomRes>?) {
+                waiting.postValue(false)
                 joinRoom(context, userId, result?.data?.roomId ?: "", userRole, userName)
             }
 
             override fun onError(httpCode: Int, code: Int, message: String?) {
                 super.onError(httpCode, code, message)
+                waiting.postValue(false)
                 // code == 1101021 房间号不存在
                 val throwable = ResponseThrowable(code, message)
                 _joinRoomStatus.value = Result.failure(throwable)
@@ -92,6 +96,7 @@ class FcrRoomViewModel : ViewModel() {
     fun joinRoom(
         context: Context, userId: String? = null, roomId: String, userRole: FcrUserRole, userName: String
     ) {
+        waiting.postValue(true)
         val userUuid = if (TextUtils.isEmpty(userId)) {
             genUserId(userName)
         } else {
@@ -121,6 +126,7 @@ class FcrRoomViewModel : ViewModel() {
                                     val options = FcrRoomJoinOptions(userName, userRole, null, it.token)
                                     roomControl.join(options, object : FcrCallback<Unit> {
                                         override fun onSuccess(res: Unit?) {
+                                            waiting.postValue(false)
                                             coreEngineInit = true
                                             this@FcrRoomViewModel.roomId = roomId
                                             _joinRoomStatus.value = Result.success(Unit)
@@ -129,6 +135,7 @@ class FcrRoomViewModel : ViewModel() {
 
                                         override fun onFailure(error: FcrError) {
                                             super.onFailure(error)
+                                            waiting.postValue(false)
                                             LogX.i(TAG, "createRoomControl onFailure   ${Thread.currentThread()}")
                                         }
                                     })
@@ -141,6 +148,7 @@ class FcrRoomViewModel : ViewModel() {
 
                         override fun onFailure(error: FcrError) {
                             super.onFailure(error)
+                            waiting.postValue(false)
                             LogX.i(TAG, "coreEngine login  onFailure $error")
                         }
                     })
@@ -149,6 +157,7 @@ class FcrRoomViewModel : ViewModel() {
 
             override fun onError(httpCode: Int, code: Int, message: String?) {
                 super.onError(httpCode, code, message)
+                waiting.postValue(false)
                 // code == 1101021 房间号不存在
                 val throwable = ResponseThrowable(code, message)
                 _joinRoomStatus.value = Result.failure(throwable)

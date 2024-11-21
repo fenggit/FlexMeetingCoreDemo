@@ -47,7 +47,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_room_id"
-        app:layout_constraintWidth_percent="0.5" />
+        app:layout_constraintWidth_percent="0.4" />
 
     <TextureView
         android:id="@+id/remote_video_view"
@@ -58,7 +58,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/self_video_view"
-        app:layout_constraintWidth_percent="0.5" />
+        app:layout_constraintWidth_percent="0.4" />
 
     <Button
         android:id="@+id/btn_leave_room"

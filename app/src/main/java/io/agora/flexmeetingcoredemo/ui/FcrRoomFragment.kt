@@ -122,9 +122,7 @@ class FcrRoomFragment : BaseFragment() {
         }
         binding.btnLeaveRoom.setOnClickListener {
             LogX.i(TAG, "btnLeaveRoom")
-            viewModel.coreEngine.getRoomControl()?.getStreamControl()?.getStreamList()?.forEach {
-                LogX.i(TAG, "streamId:" + it.streamId)
-            }
+            leaveRoom()
         }
 
         binding.btnOpenLocalVideo.setOnClickListener {
