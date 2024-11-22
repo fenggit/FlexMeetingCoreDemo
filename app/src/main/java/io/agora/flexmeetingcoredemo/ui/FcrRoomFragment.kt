@@ -45,26 +45,16 @@ class FcrRoomFragment : BaseFragment() {
     private val streamObserver = object : FcrStreamObserver {
         override fun onStreamsAdded(roomId: String, event: List<FcrStreamEvent>) {
             super.onStreamsAdded(roomId, event)
-            LogX.i(
-                TAG,
-                "roomId : $roomId  onStreamsAdded: ${event.size} 自己的id： ${
-                    viewModel.coreEngine.getRoomControl()?.getUserControl()?.getLocalUser()?.userId
-                }"
-            )
-            event.stream().forEach {
-                LogX.i(
-                    TAG,
-                    "是否自己的流 : ${
-                        it.modifiedStream.owner.userId == viewModel.coreEngine.getRoomControl()?.getUserControl()?.getLocalUser()?.userId
-                    }"
-                )
-            }
+            //染远端流
             event.stream().filter {
                 //过滤掉自己的流，还有屏幕共享的流
                 (it.modifiedStream.owner.userId != viewModel.coreEngine.getRoomControl()?.getUserControl()?.getLocalUser()?.userId)
                         && it.modifiedStream.videoSourceType != FcrVideoSourceType.SCREEN
             }.findFirst().ifPresent {
                 setRemoteVideo(it.modifiedStream.streamId, binding.remoteVideoView)
+                if (it.modifiedStream.isMicAudioEnable()) {
+                    viewModel.coreEngine.getRoomControl()?.getStreamControl()?.startPlayRemoteAudioStream(it.modifiedStream.streamId)
+                }
             }
             //fl_screen_view
             event.stream().filter {
@@ -87,6 +77,7 @@ class FcrRoomFragment : BaseFragment() {
                     binding.flScreenView.visibility = View.GONE
                 }
                 viewModel.coreEngine.getRoomControl()?.getStreamControl()?.stopRenderRemoteVideoStream(it.modifiedStream.streamId)
+                viewModel.coreEngine.getRoomControl()?.getStreamControl()?.stopPlayRemoteAudioStream(it.modifiedStream.streamId)
             }
         }
     }
