@@ -34,13 +34,11 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.permissionx)
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.24")
+    implementation(libs.lifecycleviewmodelktx)
     implementation(libs.fcrcore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
